@@ -8,7 +8,7 @@ Usage
 
 First, you've to install the gem
 
-    gem 'fastbill-automatic', git: 'git://github.com/skorth/fastbill-automatic.git'
+    gem 'fastbill-automatic', git: 'git://github.com/reputami/fastbill-automatic.git'
 
 and require it
 
