@@ -2,4 +2,7 @@ source "http://rubygems.org"
 
 gemspec
 
-gem 'pry'
+gem "rspec"
+gem "rake"
+gem "webmock"
+gem "pry"
