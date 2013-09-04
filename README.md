@@ -1,14 +1,14 @@
 Fastbill Automatic
 ==================
 
-This is a Ruby wrapper for FastBill's Automatic API based on API-Documentation v1.6 (21.08.2013)
+This is a Ruby wrapper for FastBill's Automatic API based on API-Documentation v1.8 (PA. 04.09.2013)
 
 Usage
 ======
 
 First, you've to install the gem
 
-    gem 'fastbill-automatic', git: 'git://github.com/reputami/fastbill-automatic.git', tag: 'v0.0.1'
+    gem 'fastbill-automatic', git: 'git://github.com/reputami/fastbill-automatic.git', tag: 'v0.0.2'
 
 and require it
 

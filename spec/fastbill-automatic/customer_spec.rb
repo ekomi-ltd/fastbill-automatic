@@ -3,10 +3,11 @@ require "spec_helper"
 describe Fastbill::Automatic::Customer do
   
   let(:valid_attributes) do
-    { customer_number: "5", customer_ext_uid: "", days_for_payment: "14", payment_type: "1", show_payment_notice: "1",
+    { customer_number: "5", customer_ext_uid: "123456", days_for_payment: "14", payment_type: "1", show_payment_notice: "1",
       customer_type: "consumer", organization: "Server Hosting GmbH", salutation: "mr", first_name: "Klaus",
       last_name: "Testkunde", address: "Test Strasse 41", zipcode: "26123", city: "Oldenburg", phone: "049 123 456 789",
-      fax: "049 123 456 987", email: "support@fastbill.com", paymill_token: "", comment: ""
+      fax: "049 123 456 987", email: "support@fastbill.com", paymill_token: "123456", comment: "some comment",
+      newsletter_optin: "1", language_code: "de"
     }
   end
 
@@ -17,7 +18,7 @@ describe Fastbill::Automatic::Customer do
   describe "#initialize" do
     it "initializes all attributes correctly" do
       customer.customer_number.should eql("5")
-      customer.customer_ext_uid.should eql("")
+      customer.customer_ext_uid.should eql("123456")
       customer.days_for_payment.should eql("14")
       customer.payment_type.should eql("1")
       customer.show_payment_notice.should eql("1")
@@ -32,8 +33,10 @@ describe Fastbill::Automatic::Customer do
       customer.phone.should eql("049 123 456 789")
       customer.fax.should eql("049 123 456 987")
       customer.email.should eql("support@fastbill.com")
-      customer.paymill_token.should eql("")
-      customer.comment.should eql("")
+      customer.paymill_token.should eql("123456")
+      customer.comment.should eql("some comment")
+      customer.newsletter_optin.should eql("1")
+      customer.language_code.should eql("de")
     end
   end
 
