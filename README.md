@@ -60,6 +60,7 @@ Deleting a customer:
 
     Fastbill::Automatic::Customer.delete("123456")
 
+
 Subscription
 ------------
 
