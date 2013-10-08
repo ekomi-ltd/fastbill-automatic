@@ -14,12 +14,12 @@ module Fastbill
 
     autoload :Base,         "fastbill-automatic/base"
     autoload :Customer,     "fastbill-automatic/customer"
-    autoload :Invoice,      "fastbill-automatic/Invoice"
-    autoload :Item,         "fastbill-automatic/Item"
+    autoload :Invoice,      "fastbill-automatic/invoice"
+    autoload :Item,         "fastbill-automatic/item"
     autoload :Subscription, "fastbill-automatic/subscription"
-    autoload :Template,     "fastbill-automatic/Template"
-    autoload :Article,      "fastbill-automatic/Article"
-    autoload :Coupon,       "fastbill-automatic/Coupon"
+    autoload :Template,     "fastbill-automatic/template"
+    autoload :Article,      "fastbill-automatic/article"
+    autoload :Coupon,       "fastbill-automatic/coupon"
 
     module Services
       autoload :Get,           "fastbill-automatic/services/get"
