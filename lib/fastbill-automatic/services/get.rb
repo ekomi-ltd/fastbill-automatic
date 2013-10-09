@@ -3,9 +3,11 @@ module Fastbill
     module Services
       module Get
         module ClassMethods
-
+          attr_reader :response
+          
           def get(options = {})
             response = Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.get", options)
+            puts "Fastbill get response: #{response}"
             results_from(response)
           end
 

@@ -29,6 +29,7 @@ module Fastbill
           body = {service: @info.service}
           body[(@info.service.include?('.get') ? :filter : :data)] = @info.data
           https_request.body = body.to_json
+          puts "FASTBILL REQUEST: #{https_request.body.to_s}"
           https_request
         end
       end
