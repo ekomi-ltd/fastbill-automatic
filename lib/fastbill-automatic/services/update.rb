@@ -7,8 +7,7 @@ module Fastbill
           def update_attributes(id, attributes)
             id_attribute = "#{self.class.name.split("::").last.downcase}_id".to_sym
             attributes[id_attribute] = id
-            response = Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.update", attributes)
-            true
+            Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.update", attributes)
           end
         end
 
@@ -19,8 +18,7 @@ module Fastbill
         def update_attributes(attributes)
           id_attribute = "#{self.class.name.split("::").last.downcase}_id".to_sym
           attributes[id_attribute] = self.send(id_attribute)
-          response = Fastbill::Automatic.request("#{self.class.name.split("::").last.downcase}.update", attributes)
-          true
+          Fastbill::Automatic.request("#{self.class.name.split("::").last.downcase}.update", attributes)
         end
       end
     end
