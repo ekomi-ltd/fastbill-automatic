@@ -7,7 +7,6 @@ module Fastbill
           
           def get(options = {})
             response = Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.get", options)
-            puts "Fastbill get response: #{response}"
             results_from(response)
           end
 
