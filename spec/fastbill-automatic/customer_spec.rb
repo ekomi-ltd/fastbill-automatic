@@ -1,13 +1,15 @@
 require "spec_helper"
 
 describe Fastbill::Automatic::Customer do
-  
+
   let(:valid_attributes) do
-    { customer_number: "5", customer_ext_uid: "123456", days_for_payment: "14", payment_type: "1", show_payment_notice: "1",
-      customer_type: "consumer", organization: "Server Hosting GmbH", salutation: "mr", first_name: "Klaus",
-      last_name: "Testkunde", address: "Test Strasse 41", zipcode: "26123", city: "Oldenburg", phone: "049 123 456 789",
-      fax: "049 123 456 987", email: "support@fastbill.com", paymill_token: "123456", comment: "some comment",
-      newsletter_optin: "1", language_code: "de"
+    { customer_number: "5", country_code: "de", customer_ext_uid: "123456", days_for_payment: "14", payment_type: "1", show_payment_notice: "1",
+      customer_type: "consumer", organization: "Server Hosting GmbH", salutation: "mr", first_name: "Klaus", account_receivable: "123456",
+      last_name: "Testname", address: "Test Street 12", address_2: "Test Street 12", zipcode: "26123", city: "Oldenburg", phone: "049 123 456 789",
+      phone_2: "049 123 456 789", fax: "049 123 456 987", mobile: "049 123 456 987", email: "support@fastbill.com", paymill_token: "123456", comment: "some comment",
+      newsletter_optin: "1", language_code: "de", changedata_url: "https://automatic.fastbill.com/accountdata/123456/123456", currency_code: "EUR", vat_id: "123456",
+      position: "test position", bank_name: "Test name", bank_code: "123456", bank_account_number: "123456", bank_account_owner: "Some Name",
+      dashboard_url: "https://automatic.fastbill.com/dashboard/123456/123456"
     }
   end
 
@@ -26,17 +28,31 @@ describe Fastbill::Automatic::Customer do
       customer.organization.should eql("Server Hosting GmbH")
       customer.salutation.should eql("mr")
       customer.first_name.should eql("Klaus")
-      customer.last_name.should eql("Testkunde")
-      customer.address.should eql("Test Strasse 41")
+      customer.last_name.should eql("Testname")
+      customer.address.should eql("Test Street 12")
+      customer.address_2.should eql("Test Street 12")
       customer.zipcode.should eql("26123")
       customer.city.should eql("Oldenburg")
       customer.phone.should eql("049 123 456 789")
+      customer.phone_2.should eql("049 123 456 789")
       customer.fax.should eql("049 123 456 987")
+      customer.mobile.should eql("049 123 456 987")
       customer.email.should eql("support@fastbill.com")
       customer.paymill_token.should eql("123456")
       customer.comment.should eql("some comment")
       customer.newsletter_optin.should eql("1")
       customer.language_code.should eql("de")
+      customer.country_code.should eql("de")
+      customer.changedata_url.should eql("https://automatic.fastbill.com/accountdata/123456/123456")
+      customer.dashboard_url.should eql("https://automatic.fastbill.com/dashboard/123456/123456")
+      customer.position.should eql("test position")
+      customer.account_receivable.should eql("123456")
+      customer.vat_id.should eql("123456")
+      customer.currency_code.should eql("EUR")
+      customer.bank_name.should eql("Test name")
+      customer.bank_code.should eql("123456")
+      customer.bank_account_number.should eql("123456")
+      customer.bank_account_owner.should eql("Some Name")
     end
   end
 
