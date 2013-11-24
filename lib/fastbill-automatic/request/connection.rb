@@ -31,7 +31,7 @@ module Fastbill
             v = @info.data.delete(o)
             body[o] = v if v
           end
-          body[(@info.service.include?('.get') ? :filter : :data)] = @info.data
+          body[(@info.service.ends_with?('.get') ? :filter : :data)] = @info.data
           https_request.body = body.to_json
           https_request
         end
