@@ -6,7 +6,7 @@ module Fastbill
 
           def getupcomingamount(attributes)
             response = Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.getupcomingamount", attributes)
-            (response["RESPONSE"] && response["RESPONSE"]["UNIT_PRICE"]) ? response["RESPONSE"]["UNIT_PRICE"] : nil
+            (response["RESPONSE"] && response["RESPONSE"]["TOTAL"]) ? response["RESPONSE"]["TOTAL"] : nil
           end
         end
 
