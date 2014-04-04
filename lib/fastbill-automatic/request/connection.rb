@@ -28,6 +28,7 @@ module Fastbill
           https_request.basic_auth(Fastbill::Automatic.email, Fastbill::Automatic.api_key)
           body = {service: @info.service}
           body[(@info.service.include?('.get') ? :filter : :data)] = @info.data
+          body["limit"] = 100 if @info.service.include?('.get')
           https_request.body = body.to_json
           https_request
         end
