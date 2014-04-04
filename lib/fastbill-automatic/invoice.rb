@@ -10,11 +10,14 @@ module Fastbill
       include Fastbill::Automatic::Services::Sendbypost
       include Fastbill::Automatic::Services::Setpaid
 
-      attr_accessor :invoice_id, :invoice_number, :customer_id, :month, :year, :state,
-                    :type, :customer_costcenter_id, :currency_code, :template_id, :introtext,
-                    :invoice_date, :delivery_date, :cash_discount_percent, :cash_discount_days,
-                    :eu_delivery, :items, :delete_exiting_items, :recipient, :subject, :message,
-                    :receipt_confirmation, :paid_date
+      attr_accessor :invoice_id, :type, :customer_id, :customer_number, :customer_costcenter_id,
+                    :organization, :salutation, :first_name, :last_name, :address, :address_2,
+                    :zipcode, :city, :comment, :payment_type, :days_for_payment, :bank_name, 
+                    :bank_account_number, :bank_code, :bank_account_owner, :bank_iban, :bank_bic,
+                    :affiliate, :country_code, :vat_id, :currency_code, :template_id, :subscription_id,
+                    :subscription_invoice_counter, :invoice_number, :invoice_title, :introtext, :paid_date,
+                    :is_canceled, :invoice_date, :due_date, :delivery_date, :cash_discount_percent, :cash_discount_days,
+                    :sub_total, :vat_total, :vat_items, :items, :total, :payment_info, :document_url, :paypal_url
 
       attr_reader   :remaining_credits
     end
