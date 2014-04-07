@@ -7,9 +7,9 @@ module Fastbill
       include Fastbill::Automatic::Services::Setusagedata
       include Fastbill::Automatic::Services::Cancel
 
-      attr_accessor :subscription_id, :customer_id, :subscription_ext_uid, :article_number, :customer_id,
-                    :coupon, :title, :unit_price, :currency_code, :next_event, :quantity, :description,
-                    :usage_date
+      attr_accessor :subscription_id, :customer_id, :start, :next_event, :cancellation_date, :status,
+                    :hash, :x_attributes, :article_number, :subscription_ext_uid, :invoice_title, :last_event,
+                    :addons, :expiration_date
     end
   end
 end
