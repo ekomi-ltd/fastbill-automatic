@@ -10,6 +10,11 @@ module Fastbill
       attr_accessor :subscription_id, :customer_id, :start, :next_event, :cancellation_date, :status,
                     :hash, :x_attributes, :article_number, :subscription_ext_uid, :invoice_title, :last_event,
                     :addons, :expiration_date
+                    
+      def canceled?
+        self.cancellation_date != "0000-00-00 00:00:00"
+      end
+      
     end
   end
 end
