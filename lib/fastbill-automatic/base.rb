@@ -4,6 +4,20 @@ module Fastbill
       include Fastbill::Automatic::Services::Get
       include Fastbill::Automatic::Services::Create
 
+      @@request_infos = []
+
+      def self.request_infos 
+        @@request_infos
+      end
+
+      def self.request_infos=(info_array)
+        @@request_infos = info_array
+      end
+
+      def self.clear_request_infos 
+        @@request_infos = []
+      end
+
       def initialize(attributes = {})
         set_attributes(attributes)
       end
