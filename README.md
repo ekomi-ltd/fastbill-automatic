@@ -172,3 +172,32 @@ Find existing templates (see API limits):
     Fastbill::Automatic::Template.get()
 
     Due to the API implementation the result is an array.
+
+
+Testing
+=======
+
+To make testing easier in your app use change the default request mode from `:https` to:
+
+    Fastbill::Automatic.request_method = :test
+
+Instead of actual requests you find an array with the request infos that you can inspect:
+
+    Fastbill::Automatic::Base.request_infos
+
+To clear the request infos before or after your test runs do:
+
+    Fastbill::Automatic::Base.clear_request_infos
+
+
+
+
+
+
+
+
+
+
+
+
+
