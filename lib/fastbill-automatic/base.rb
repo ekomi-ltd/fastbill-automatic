@@ -4,6 +4,8 @@ module Fastbill
       include Fastbill::Automatic::Services::Get
       include Fastbill::Automatic::Services::Create
 
+      attr_accessor :attributes
+
       @@request_infos = []
 
       def self.request_infos 
@@ -19,6 +21,7 @@ module Fastbill
       end
 
       def initialize(attributes = {})
+        self.attributes = attributes
         set_attributes(attributes)
       end
 
