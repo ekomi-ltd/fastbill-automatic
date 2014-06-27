@@ -82,6 +82,79 @@ describe Fastbill::Automatic::UsageData do
 
   end
 
+  describe '#where' do
+    
+    let (:empty_response) do
+      {
+        "ITEMS"=>[]
+      }
+    end
+
+    let (:two_items_response) do
+      {
+        "ITEMS"=>[
+          {"USAGEDATA_ID"=>"345278",
+           "CUSTOMER_ID"=>"672782",
+           "SUBSCRIPTION_ID"=>"294282",
+           "ARTICLE_ID"=>"2458",
+           "UNIT_PRICE"=>"6.0000",
+           "DESCRIPTION"=>"Standardtermin",
+           "CURRENCY_CODE"=>"EUR",
+           "STATUS"=>"open",
+           "USAGE_DATE"=>"2014-06-26 14:46:19",
+           "CREATED" => "2014-06-26 14:46:19",
+           "QUANTITY"=>"1"},
+           {"USAGEDATA_ID"=>"345279",
+            "CUSTOMER_ID"=>"672782",
+            "SUBSCRIPTION_ID"=>"294282",
+            "ARTICLE_ID"=>"2458",
+            "UNIT_PRICE"=>"15.0000",
+            "DESCRIPTION"=>"Premiumtermin",
+            "CURRENCY_CODE"=>"EUR",
+            "STATUS"=>"open",
+            "USAGE_DATE"=>"2014-06-26 14:48:19",
+            "CREATED" => "2014-06-26 14:48:21",
+            "QUANTITY"=>"1"}
+        ]
+      }
+    end
+
+    let (:expected_items) do
+      two_items_response["ITEMS"].map do |item_attributes|
+        init_hash = Hash[*item_attributes.map{|k,v| [k.downcase.to_sym, v]}.flatten]
+        Fastbill::Automatic::UsageData.new(init_hash)
+      end
+    end
+
+    context 'no usage data' do
+
+      before do
+        Fastbill::Automatic.should_receive(:request).with("subscription.getusagedata", {
+          subscription_id: '294282'}).and_return(empty_response)
+      end
+
+      it 'returns an empty array' do
+        Fastbill::Automatic::UsageData.where(:subscription_id => '294282').should eq []
+      end
+
+    end
+    
+    context 'usage data' do
+
+      before do
+        Fastbill::Automatic.should_receive(:request).with("subscription.getusagedata", {
+          subscription_id: '294282'}).and_return(two_items_response)
+      end
+
+      it 'returns an empty array' do
+        Fastbill::Automatic::UsageData.where(:subscription_id => '294282').should eq(expected_items)
+      end
+
+    end
+
+
+  end
+
   describe '#find_by_usage_date' do
 
     let(:existing_usagedata) do

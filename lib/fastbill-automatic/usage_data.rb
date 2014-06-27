@@ -56,13 +56,9 @@ module Fastbill
       end
 
       def update_attributes(attributes)
-        initialize(UsageData.make_values_string(attributes.merge(attributes)))
+        initialize(UsageData.prepare_attributes(attributes.merge(attributes)))
         save
         self
-      end
-
-      def self.make_values_string(attributes)
-        Hash[*attributes.map{|k,v| [k, v.to_s]}.flatten]
       end
 
       def save
@@ -137,17 +133,31 @@ module Fastbill
 
       class << self
 
-      def setusagedata(set_params)
-        response = Fastbill::Automatic.request("subscription.setusagedata", set_params)
-      end
+        def prepare_attributes(attributes)
+          Hash[*attributes.map{|k,v| [k.downcase.to_sym, v.to_s]}.flatten]
+        end
 
-      def getusagedata(get_params)
-        response = Fastbill::Automatic.request("subscription.getusagedata", get_params)
-      end
+        def setusagedata(set_params)
+          response = Fastbill::Automatic.request("subscription.setusagedata", set_params)
+        end
 
-      def deleteusagedata(delete_params)
-        response = Fastbill::Automatic.request("subscription.deleteusagedata", delete_params)
-      end
+        def getusagedata(get_params)
+          response = Fastbill::Automatic.request("subscription.getusagedata", get_params)
+        end
+
+        def deleteusagedata(delete_params)
+          response = Fastbill::Automatic.request("subscription.deleteusagedata", delete_params)
+        end
+
+        def where(get_params)
+          response = UsageData.getusagedata(get_params)
+          result = []
+          items = response['ITEMS']||[]
+          items.each do|item|
+            result << UsageData.new(prepare_attributes(item))
+          end
+          result
+        end
 
       end
 
