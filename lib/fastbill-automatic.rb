@@ -21,6 +21,7 @@ module Fastbill
     autoload :Template,     "fastbill-automatic/template"
     autoload :Article,      "fastbill-automatic/article"
     autoload :Coupon,       "fastbill-automatic/coupon"
+    autoload :UsageData,    "fastbill-automatic/usage_data"
 
     module Services
       autoload :Get,           "fastbill-automatic/services/get"

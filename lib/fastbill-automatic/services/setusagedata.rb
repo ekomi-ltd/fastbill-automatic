@@ -8,12 +8,14 @@ module Fastbill
             response = Fastbill::Automatic.request("#{self.name.split("::").last.downcase}.setusagedata", attributes)
             true
           end
-        end
 
-        def self.included(base)
-          base.extend(ClassMethods)
+          def self.included(base)
+            base.extend(ClassMethods)
+          end
         end
       end
     end
   end
 end
+
+
