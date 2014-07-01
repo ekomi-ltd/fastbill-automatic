@@ -5,7 +5,7 @@ module Fastbill
       ATTRIBUTES = [
         :subscription_id,
         :customer_id,
-        :article_id,
+        :article_number,
         :unit_price,
         :description,
         :currency_code,
@@ -76,7 +76,7 @@ module Fastbill
 
       def self.get_remote_attributes(get_params)
         response = UsageData.getusagedata(get_params)
-        item_attributes = response['ITEMS'][-1]
+        item_attributes = response['RESPONSE']['ITEMS'].last
         item_attributes
       end
 
@@ -85,14 +85,18 @@ module Fastbill
         time = time.strftime("%Y-%m-%d %H:%M:%S")
         result = getusagedata(subscription_id: subscription_id, start: time, end: time)
 
-        result_items = result['ITEMS']  
-        last_item_attributes = result_items ? result_items[-1] : nil
+        result_items = result['RESPONSE']['ITEMS']  
+        last_item_attributes = result_items ? result_items.last : nil
 
         if last_item_attributes
+
+          if last_item_attributes['CURRENCY_CODE'] == []
+            last_item_attributes['CURRENCY_CODE'] = ''
+          end
+
           init_attributes =  Hash[*last_item_attributes.map{|k,v| [k.downcase.to_sym, v]}.flatten]
+
           self.new(init_attributes)
-        else
-          nil
         end
 
       end
@@ -152,7 +156,7 @@ module Fastbill
         def where(get_params)
           response = UsageData.getusagedata(get_params)
           result = []
-          items = response['ITEMS']||[]
+          items = response['RESPONSE']['ITEMS']||[]
           items.each do|item|
             result << UsageData.new(prepare_attributes(item))
           end
