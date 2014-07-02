@@ -76,6 +76,7 @@ module Fastbill
 
       def self.get_remote_attributes(get_params)
         response = UsageData.getusagedata(get_params)
+        binding.pry
         item_attributes = response['RESPONSE']['ITEMS'].last
         item_attributes
       end
