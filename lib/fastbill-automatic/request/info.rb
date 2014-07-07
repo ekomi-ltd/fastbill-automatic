@@ -4,6 +4,10 @@ module Fastbill
       class Info
         attr_accessor :service, :data
 
+        def ==(other)
+          @service == other.service && @data == other.data
+        end
+
         def initialize(service, data)
           @service = service
           @data    = data

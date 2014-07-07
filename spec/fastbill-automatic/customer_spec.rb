@@ -9,7 +9,7 @@ describe Fastbill::Automatic::Customer do
       phone_2: "049 123 456 789", fax: "049 123 456 987", mobile: "049 123 456 987", email: "support@fastbill.com", paymill_token: "123456", comment: "some comment",
       newsletter_optin: "1", language_code: "de", changedata_url: "https://automatic.fastbill.com/accountdata/123456/123456", currency_code: "EUR", vat_id: "123456",
       position: "test position", bank_name: "Test name", bank_code: "123456", bank_account_number: "123456", bank_account_owner: "Some Name",
-      dashboard_url: "https://automatic.fastbill.com/dashboard/123456/123456"
+      dashboard_url: "https://automatic.fastbill.com/dashboard/123456/123456", hash: "fcbab5d76170d15e86f97f644385d5e3" 
     }
   end
 
@@ -53,6 +53,18 @@ describe Fastbill::Automatic::Customer do
       customer.bank_code.should eql("123456")
       customer.bank_account_number.should eql("123456")
       customer.bank_account_owner.should eql("Some Name")
+    end
+
+    it 'should not overwrite the hash method' do
+      customer.hash.class.should eql Fixnum
+    end
+
+  end
+
+  describe ".attributes" do
+    it "makes all attributes accessible by hash" do
+      customer.attributes.should eql(valid_attributes)
+      customer.attributes[:hash].should eql("fcbab5d76170d15e86f97f644385d5e3")
     end
   end
 

@@ -11,6 +11,7 @@ module Fastbill
 
     @@api_key = nil
     @@email = nil
+    @@request_method = :https
 
     autoload :Base,         "fastbill-automatic/base"
     autoload :Customer,     "fastbill-automatic/customer"
@@ -20,6 +21,7 @@ module Fastbill
     autoload :Template,     "fastbill-automatic/template"
     autoload :Article,      "fastbill-automatic/article"
     autoload :Coupon,       "fastbill-automatic/coupon"
+    autoload :UsageData,    "fastbill-automatic/usage_data"
 
     module Services
       autoload :Get,           "fastbill-automatic/services/get"
@@ -48,6 +50,20 @@ module Fastbill
     class FastbillError < StandardError; end
     class AuthenticationError < FastbillError; end
     class APIError < FastbillError; end
+    class NonSupportedRequestMethod < FastbillError; end
+
+
+    def self.request_method
+      @@request_method
+    end
+
+    def self.request_method=(method)
+      if [:https, :test].include? method
+        @@request_method = method
+      else
+        raise NonSupportedRequestMethod
+      end
+    end
 
     def self.api_key
       @@api_key
@@ -67,7 +83,11 @@ module Fastbill
 
     def self.request(service, data)
       info = Request::Info.new(service, data)
-      Request::Base.new(info).perform
+      if request_method == :https
+        Request::Base.new(info).perform
+      else
+        Fastbill::Automatic::Base.request_infos <<  info
+      end
     end
   end
 end
