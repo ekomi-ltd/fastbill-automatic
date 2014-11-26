@@ -13,6 +13,7 @@ module Fastbill
           def results_from(response)
             results = []
             return results if response["RESPONSE"].nil?
+            return [] if response["RESPONSE"]["#{self.name.split("::").last.upcase}S"].nil?
             
             response["RESPONSE"]["#{self.name.split("::").last.upcase}S"].each do |obj|
               results << self.new(obj)
