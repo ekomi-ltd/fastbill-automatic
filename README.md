@@ -111,9 +111,9 @@ Creating a new invoice:
 
 Find existing invoices (see API limits):
 
-    Fastbill::Automatic::Invoive.get(invoice_id: '123456') # With filter
-    Fastbill::Automatic::Invoive.get(customer_id: '123456') # # With filter
-    Fastbill::Automatic::Invoive.get() # Without filters
+    Fastbill::Automatic::Invoice.get(invoice_id: '123456') # With filter
+    Fastbill::Automatic::Invoice.get(customer_id: '123456') # # With filter
+    Fastbill::Automatic::Invoice.get() # Without filters
 
     Due to the API implementation the result in both cases is an array.
 

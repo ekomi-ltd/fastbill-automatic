@@ -5,7 +5,7 @@ require "fastbill-automatic/version"
 
 module Fastbill
   module Automatic
-    API_BASE    = "automatic.fastbill.com"
+    API_BASE    = "my.fastbill.com"
     API_VERSION = "1.0"
     ROOT_PATH   = File.dirname(__FILE__)
 
